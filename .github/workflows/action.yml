@@ -37,7 +37,7 @@ jobs:
       - name: Build
         if: steps.check.outputs.status == 'ok'
         env:
-          CHANGE: ${{ secrets.UTILS }}
+          UTILS: ${{ secrets.UTILS }}
         run: |
           pip install -q -r requirements.txt
           echo "Requirements Installed"
