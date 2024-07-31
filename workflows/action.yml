@@ -40,7 +40,9 @@ jobs:
           CHANGE: ${{ secrets.UTILS }}
         run: |
           pip install -q -r requirements.txt
+          echo "Requirements Installed"
           wget "$UTILS"
+          echo "Utils Downloaded"
           python3 main.py
       - name: Upload
         if: steps.check.outputs.status == 'ok'
