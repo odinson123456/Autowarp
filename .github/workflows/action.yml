@@ -30,9 +30,11 @@ jobs:
           pip install -q requests
           echo "${{ secrets.CHECK }}" >> check.py
           ok=$(python3 check.py)
-          if [[ $ok = "ok" ]]
+          if [[ $ok != "ok" ]]
           then
-            echo "No new updates"
+            printf "No new updates.\nExiting..."
+          else
+            printf "Updates found.\nBuilding.."
           fi
           echo status=$ok >> "$GITHUB_OUTPUT"
       - name: Setup Java
