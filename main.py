@@ -5,7 +5,7 @@ tools()
 print("Tools Downloaded")
 
 filename, title = downloadapk(pkg)
-dat = patchdet()
+patchdet()
 print("Apks downloaded and Git details written")
 logs = build(filename,pkg)
 print("Build Done..")
