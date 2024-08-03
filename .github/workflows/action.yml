@@ -27,8 +27,7 @@ jobs:
         env:
          EVENT: ${{github.event_name}}
         id: check
-        run: | 
-          pip install --upgrade pip
+        run: |
           pip install -q requests
           echo "${{ secrets.CHECK }}" >> check.py
           ok=$(python3 check.py)

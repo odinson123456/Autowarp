@@ -1,6 +1,7 @@
 import asyncio
 import uvloop
 import json
+import traceback
 from os import getenv
 from pyrogram import Client
 from pyrogram.enums import ParseMode
@@ -35,8 +36,9 @@ async def main():
         await app.send_message(chat_id=chat, text=filejs,parse_mode=ParseMode.MARKDOWN)
         for apk in json.loads(open("logs.json").read()):
             try:
-                await app.send_message(
-                    chat_id=chat,text="\n\nLogs : "+uplog(apk["title"],apk["logs"])
+                await app.send_document(
+                    chat_id=chat,caption="\n\nLogs : "+uplog(apk["title"],apk["logs"]),
+                    document="logs.json"
                 )
                 await app.send_document(
                     chat_id=chat,
@@ -45,7 +47,7 @@ async def main():
                     file_name="YoutubeRevanced.apk"
                 )
             except Exception as e:
-                print(e)
+                traceback.print_exc()
 
 uvloop.install()
 asyncio.run(main())
