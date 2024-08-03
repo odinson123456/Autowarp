@@ -37,7 +37,7 @@ async def main():
         for apk in json.loads(open("logs.json").read()):
             try:
                 await app.send_document(
-                    chat_id=chat,caption="\n\nLogs : "+uplog(apk["title"],apk["logs"]),
+                    chat_id=chat,
                     document="logs.json"
                 )
                 await app.send_document(
