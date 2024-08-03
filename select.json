@@ -6,6 +6,7 @@
     "in": [
         "Remove screen capture restriction",
         "Change package name",
-        "Remove screenshot restriction"
+        "Remove screenshot restriction",
+        "Remove share targets"
     ]
 }
