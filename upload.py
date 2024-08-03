@@ -35,6 +35,9 @@ async def main():
         await app.send_message(chat_id=chat, text=filejs,parse_mode=ParseMode.MARKDOWN)
         for apk in json.loads(open("logs.json").read()):
             try:
+                await app.send_message(
+                    chat_id=chat,text="\n\nLogs : "+uplog(apk["title"],apk["logs"])
+                )
                 await app.send_document(
                     chat_id=chat,
                     document=f"out/{apk['filename']}",
