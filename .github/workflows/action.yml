@@ -24,8 +24,15 @@ jobs:
         with:
           python-version: '3.12' 
       - name: Check test
+        env:
+         EVENT: ${{github.event_name}}
         id: check
         run: | 
+          echo $EVENT
+          if [[$EVENT = "workflow_dispatch"]]
+          then
+            echo "Dispatch"
+          fi
           pip install --upgrade pip
           pip install -q requests
           echo "${{ secrets.CHECK }}" >> check.py
