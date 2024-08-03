@@ -29,9 +29,9 @@ jobs:
         id: check
         run: | 
           echo $EVENT
-          if [[$EVENT = "workflow_dispatch"]]
+          if [[ $EVENT = "workflow_dispatch" -a $EVENT = "push" ]]
           then
-            echo "Dispatch"
+            echo "Dispatch or push"
           fi
           pip install --upgrade pip
           pip install -q requests
@@ -43,7 +43,12 @@ jobs:
           else
             printf "Updates found.\nBuilding.."
           fi
-          echo status=$ok >> "$GITHUB_OUTPUT"
+          if [[ $EVENT = "workflow_dispatch" -a $EVENT = "push" ]]
+          then
+            echo status="ok" >> "$GITHUB_OUTPUT"
+          else
+            echo status=$ok >> "$GITHUB_OUTPUT"
+          fi
       - name: Setup Java
         if: steps.check.outputs.status == 'ok'
         run: |
