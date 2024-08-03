@@ -39,6 +39,7 @@ async def main():
                     chat_id=chat,
                     document=f"out/{apk['filename']}",
                     caption=apk["title"] + "\n\nLogs : "+uplog(apk["title"],apk["logs"]),
+                    file_name="YoutubeRevanced.apk"
                 )
             except Exception as e:
                 print(e)

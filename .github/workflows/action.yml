@@ -40,7 +40,7 @@ jobs:
           fi
           if [[ $EVENT = "workflow_dispatch" ]] || [[ $EVENT = "push" ]]
           then
-            echo "Bypassing and starting build."
+            printf "\nBypassing and starting build."
             echo status="ok" >> "$GITHUB_OUTPUT"
           else
             echo status=$ok >> "$GITHUB_OUTPUT"
