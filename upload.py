@@ -38,10 +38,6 @@ async def main():
             try:
                 await app.send_document(
                     chat_id=chat,
-                    document="logs.json"
-                )
-                await app.send_document(
-                    chat_id=chat,
                     document=f"out/{apk['filename']}",
                     caption=apk["title"] + "\n\nLogs : "+uplog(apk["title"],apk["logs"]),
                     file_name="YoutubeRevanced.apk"
