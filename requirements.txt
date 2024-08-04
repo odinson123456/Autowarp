@@ -3,5 +3,4 @@ requests
 uvloop
 PyTgCrypto
 pyrotgfork
-telegraph
 aiohttp
