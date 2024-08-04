@@ -4,3 +4,4 @@ uvloop
 PyTgCrypto
 pyrotgfork
 telegraph
+aiohttp

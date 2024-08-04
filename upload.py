@@ -5,23 +5,7 @@ import traceback
 from os import getenv
 from pyrogram import Client
 from pyrogram.enums import ParseMode
-from telegraph import  Telegraph
-
-def uplog(title,logs):
-    short_name = "Rev Logger"
-    user = Telegraph().create_account(short_name=short_name)
-    access_token = user.get("access_token")
-    content = logs
-    content = content.replace("\n", "<br>")
-    response = Telegraph(access_token=access_token).create_page(
-        title=title,
-        html_content=content,
-        author_name=str("Logger"),
-        author_url="https://github.com/odinson123456/Autowarp",
-    )
-    path = response["path"]
-    lnk = f"https://graph.org/{path}"
-    return lnk
+from utils import *
 
 async def main():
     app = Client(
@@ -34,16 +18,17 @@ async def main():
     async with app:
         filejs = open("data.txt").read()
         await app.send_message(chat_id=chat, text=filejs,parse_mode=ParseMode.MARKDOWN)
-        for apk in json.loads(open("logs.json").read()):
-            try:
-                await app.send_document(
-                    chat_id=chat,
-                    document=f"out/{apk['filename']}",
-                    caption=apk["title"] + "\n\nLogs : "+uplog(apk["title"],apk["logs"]),
-                    file_name="YoutubeRevanced.apk"
-                )
-            except Exception as e:
-                traceback.print_exc()
+        apk =  json.loads(open("logs.json").read())[0]
+        logslnk = await paste(apk['logs'])
+        try:
+            await app.send_document(
+                chat_id=chat,
+                document=f"out/{apk['filename']}",
+                caption=apk["title"] + "\n\nLogs : "+logslnk,
+                file_name="YoutubeRevanced.apk"
+            )
+        except Exception as e:
+            traceback.print_exc()
 
 uvloop.install()
 asyncio.run(main())
