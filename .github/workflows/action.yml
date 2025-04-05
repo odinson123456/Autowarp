@@ -32,7 +32,7 @@ jobs:
           tag=$(jq -r '.tag_name' release.json)
           cat releases.json
           exists=$(jq --arg tag "$tag" 'index($tag)' releases.json)
-          jq ". + [\"$tag\"]" rel.json > tmp.json && mv tmp.json releases.json
+          jq ". + [\"$tag\"]" releases.json > tmp.json && mv tmp.json releases.json
           cat releases.json
           if [[ "$exists" != "null" ]]
           then
