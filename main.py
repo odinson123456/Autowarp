@@ -21,7 +21,7 @@ for name, pkgname in pkgs.items():
         "logs": patchapk(f, pkgname, patches),
         "outfile": f"out/{f}",
     }
-    print(f"Patched {f} for {title}")
+    print(f"Patched {title}")
 
 with open("otp.json", "w") as f:
     json.dump(otp, f, indent=4)

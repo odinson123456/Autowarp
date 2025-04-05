@@ -3,3 +3,6 @@ wget $( curl https://api.github.com/repos/revanced/revanced-cli/releases | jq -r
 
 # Downloads patches
 wget $(cat release.json | jq -r '.assets[] | select(.name | test("patches.*\\.rvp$")) | .browser_download_url') -O patches.rvp
+
+# writes commit body to data.txt
+jq -r '.body' release.json > data.txt
