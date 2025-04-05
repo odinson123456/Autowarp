@@ -16,9 +16,11 @@ for name, pkgname in pkgs.items():
     f, title = downloadapk(pkgname)
     print(f"Downloaded {f} for {title}")
     print(f"Applying patches for {name}")
+    plog = patchapk(f, pkgname, patches)
+    print(plog)
     otp[pkgname] = {
-        "name": name,
-        "logs": patchapk(f, pkgname, patches),
+        "name": title,
+        "logs": plog,
         "outfile": f"out/{f}",
     }
     print(f"Patched {title}")
