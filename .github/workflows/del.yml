@@ -1,0 +1,21 @@
+name: Revanced
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh run \
+            list --json databaseId  -q '.[].databaseId' -w integration.yml --limit 500 \
+            | xargs -IID -P 15 \
+              gh api "repos/$(gh repo view --json nameWithOwner -q .nameWithOwner)/actions/runs/ID" \
+              -X DELETE
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
