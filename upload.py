@@ -19,7 +19,7 @@ async def main():
     async with app:
         filejs = open("data.txt").read()
         await app.send_message(chat_id=chat, text=filejs, parse_mode=ParseMode.MARKDOWN)
-        for pkg, data in json.loads(open("otp.json", "r").read()):
+        for data in json.loads(open("otp.json").read()).values():
             logslnk = await paste(data["logs"])
             try:
                 await app.send_document(
@@ -30,7 +30,6 @@ async def main():
                 )
             except:
                 traceback.print_exc()
-
 
 uvloop.install()
 asyncio.run(main())
