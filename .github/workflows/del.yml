@@ -1,4 +1,4 @@
-name: Revanced
+name: Delete runs
 
 on:
   push:
@@ -8,12 +8,13 @@ on:
     - cron: "0 * * * *"
 
 jobs:
-  build:
+  del:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           gh run \
-            list --json databaseId  -q '.[].databaseId' -w integration.yml --limit 500 \
+            list --json databaseId,status -q 'map(select(.status == "completed" )) | .[].databaseId' --limit 500 \
             | xargs -IID -P 15 \
               gh api "repos/$(gh repo view --json nameWithOwner -q .nameWithOwner)/actions/runs/ID" \
               -X DELETE
