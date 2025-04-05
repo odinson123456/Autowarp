@@ -30,7 +30,10 @@ jobs:
         run: |
           curl https://api.github.com/repos/revanced/revanced-patches/releases | jq -r '.[0]' > release.json
           tag=$(jq -r '.tag_name' release.json)
+          cat releases.json
           exists=$(jq --arg tag "$tag" 'index($tag)' releases.json)
+          jq ". + [\"$tag\"]" rel.json > tmp.json && mv tmp.json releases.json
+          cat releases.json
           if [[ "$exists" != "null" ]]
           then
             printf "No new updates.\nExiting..."
