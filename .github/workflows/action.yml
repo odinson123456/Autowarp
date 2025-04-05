@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "* * * * *"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -43,11 +43,12 @@ jobs:
             printf "\nBypassing and starting build."
             echo status="ok" >> "$GITHUB_OUTPUT"
           else
-            echo status=$exists >> "$GITHUB_OUTPUT"
+            echo status="$exists" >> "$GITHUB_OUTPUT"
           fi
       - name: Setup Java
         if: steps.check.outputs.status != 'null'
         run: |
+          exit
           echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
       - name: Build
         if: steps.check.outputs.status != 'null'
