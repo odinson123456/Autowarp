@@ -39,6 +39,7 @@ jobs:
             printf "Updates found.\nBuilding.."
           fi
           echo status="$exists" >> "$GITHUB_OUTPUT"
+          echo "status=$exists"
           #if [[ $EVENT = "workflow_dispatch" ]] || [[ $EVENT = "push" ]]
           #then
           #  printf "\nBypassing and starting build."
