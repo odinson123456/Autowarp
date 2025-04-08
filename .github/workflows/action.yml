@@ -48,7 +48,6 @@ jobs:
       - name: Setup Java
         if: steps.check.outputs.status == 'null'
         run: |
-          exit
           echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
       - name: Build
         if: steps.check.outputs.status == 'null'
